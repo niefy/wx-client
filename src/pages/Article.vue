@@ -2,7 +2,7 @@
   <div class="detail-page">
     <div class="flex-item" v-if="article.title">
       <div class="page-title">{{article.title}}</div>
-      <div class="update-time">更新时间：{{dateFormat(article.updateTime)}}</div>
+      <div class="update-time">更新时间：{{article.updateTime}}</div>
       <div id="content" v-html="article.content"></div>
     </div>
     <Loading v-else></Loading>
@@ -16,7 +16,6 @@
 <script>
   import fly from '../js/request';
   import toast from '../js/toast';
-  import datetimeFormat from '../js/datetime';
   import wxShare from '../js/wxShare';
 
   export default {
@@ -43,12 +42,6 @@
       this.getDetail();
     },
     methods: {
-      dateFormat(timemils) {
-        if (!timemils) {
-          return '';
-        }
-        return datetimeFormat(timemils, 'yyyy-MM-dd');
-      },
       getDetail() {
         fly.get('/wx/article/detail',{
 			    articleId: this.articleId
