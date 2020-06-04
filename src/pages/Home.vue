@@ -1,23 +1,27 @@
 <template>
   <div>
     <SearchBar></SearchBar>
-    <GridGroup title="常见问题">
-      <ListCell title="文章示例" link="/article/1" is-link></ListCell>
-      <ListCell title="微信登录示例" link="/wxLogin" is-link></ListCell>
-    </GridGroup>
+    <van-grid class="margin-top" :column-num="3">
+        <van-grid-item icon="underway" text="文字" />
+        <van-grid-item icon="music" text="文字" />
+        <van-grid-item icon="photo" text="文字" />
+        <van-grid-item icon="shop" text="文字" />
+        <van-grid-item icon="vip-card" text="文字" />
+        <van-grid-item icon="gift-card" text="文字" />
+        <van-grid-item icon="bell" text="文字" />
+        <van-grid-item icon="map-marked" text="文字" />
+        <van-grid-item icon="column" text="文字" />
+    </van-grid>
+    <van-cell-group title="常见问题">
+        <van-cell title="文章示例" is-link to="/article/1" />
+        <van-cell title="微信登录示例" is-link to="/wxLogin" />
+    </van-cell-group>
   </div>
 </template>
 <script>
-  import toast from '../js/toast.js';
-  import wxShare from '../js/wxShare';
-
-
   export default {
     components: {
-      SearchBar:()=>import('../components/SearchBar'),
-      GridGroup:()=>import('../components/GridGroup'),
-      GridCell:()=>import('../components/GridCell'),
-      ListCell:()=>import('../components/ListCell')
+      SearchBar:()=>import('../components/SearchBar')
     },
     data() {
       return {
@@ -25,12 +29,7 @@
       }
     },
     mounted() {
-      wxShare();//加载微信分享
-    },
-    methods: {
-      tip(msg) {
-        toast(msg);
-      }
+      this.$wxShare();//加载微信分享
     }
   }
 </script>

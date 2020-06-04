@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="text-gray">{{guideText}}</div>
                 <div class="qrcode">
-                    <img src="@/assets/weixin_qrcode.png"/>
+                    <img src="@/assets/weixin_qrcode.jpg"/>
                 </div>
                 <div class="text-center">请微信扫描或识别二维码</div>
             </div>

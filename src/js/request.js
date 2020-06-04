@@ -1,5 +1,4 @@
 import fly from 'flyio'
-import toast from './toast';
 
 fly.config.timeout = 10000;
 
@@ -15,16 +14,16 @@ fly.interceptors.response.use(
 		if (response.status == 200) {
 			let result = response.data;
 			if (result.code != 0 && result.code != 200 && result.code != 400) {
-				toast(result.msg);
+				console.error(result.msg);
 			}
 			return result
 		} else {
-			toast('服务端出错');
+			console.error('服务端出错');
 		}
 	},
 	(err) => {
 		//发生网络错误后会走到这里
-		toast('网络错误！');
+		console.error('网络错误！');
 	}
 )
 

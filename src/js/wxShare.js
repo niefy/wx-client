@@ -1,6 +1,4 @@
 import fly from '../js/request';
-//import wx from 'weixin-js-sdk';
-import toast from '../js/toast.js';
 
 // 朋友圈
 let title = '微信CMS-By Niefy';

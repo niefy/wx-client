@@ -1,27 +1,18 @@
 <template>
-  <div class="detail-page">
-    <div class="flex-item" v-if="article.title">
+  <div class="page">
+    <div class="page-main" v-if="article.title">
       <div class="page-title">{{article.title}}</div>
       <div class="update-time">更新时间：{{article.updateTime}}</div>
       <div id="content" v-html="article.content"></div>
     </div>
-    <Loading v-else></Loading>
+    <van-skeleton title :row="3"  v-else/>
     <div class="footer">
-      <div class="declaration">
-        免责声明：xxx
-      </div>
+      <van-divider>powerby niefy</van-divider>
     </div>
   </div>
 </template>
 <script>
-  import fly from '../js/request';
-  import toast from '../js/toast';
-  import wxShare from '../js/wxShare';
-
   export default {
-    components: {
-      Loading:()=>import('../components/Loading')
-    },
     data() {
       return {
         articleId: this.$route.params.articleId,
@@ -43,15 +34,15 @@
     },
     methods: {
       getDetail() {
-        fly.get('/wx/article/detail',{
+        this.$fly.get('/wx/article/detail',{
 			    articleId: this.articleId
         }).then(res => {
           if (res.code==200) {
                 if(!res.data)this.$go('/404')
                 this.article = res.data;
-                wxShare('/article/' + this.id, this.article.title);
+                this.$wxShare('/article/' + this.id, this.article.title);
           } else {
-            toast(res.msg);
+            Toast(res.msg);
           }
         });
       },
@@ -68,12 +59,9 @@
 </script>
 <style src="@/style/article.css"></style>
 <style scoped>
-  .detail-page {
+  .page-main {
     background-color: #FFFFFF;
     padding: 0.8rem;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
   }
 
 
@@ -82,7 +70,7 @@
     font-size: 18px;
     color: #666666;
     font-weight: bold;
-    border-bottom: 1px solid #DADADA;
+    border-bottom: 1px solid #dadada;
     padding-bottom: 5px;
   }
 
@@ -93,10 +81,6 @@
     margin-bottom: 20px;
   }
 
-  .text-red {
-    color: #FF0000;
-  }
-
   #content {
     color: #505050;
     font-size: 1rem;
@@ -104,26 +88,6 @@
   }
 
   .footer {
-    margin-top: 5rem;
-  }
-
-  .flex-group {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-  }
-
-  .flex-group > a {
-    color: #4285f4;
-    font-size: 0.9rem;
-    margin-left: 1rem;
-  }
-
-  .declaration {
-    font-size: 0.8rem;
-    color: #959595;
-    border-top: 1px solid #DADADA;
-    line-height: 1.3rem;
-    padding: 1rem 0;
+    margin-top: 30px;
   }
 </style>

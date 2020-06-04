@@ -7,7 +7,6 @@
 </template>
 <script>
     import wxAuth from '../js/wxAuth.js'
-    import wxShare from '../js/wxShare';
 
     export default {
         components: {
@@ -23,7 +22,7 @@
                 this.wxOpenid=openid
                 
             });
-            wxShare();
+            this.$wxShare();
         },
         methods: {
             

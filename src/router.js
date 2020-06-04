@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+// import Vue from 'vue'
+// import Router from 'vue-router'
 
-Vue.use(Router)
+// Vue.use(Router)
 
-const router = new Router({
+const router = new VueRouter({
 	routes: [
 		{
 			path: '/',
@@ -18,9 +18,17 @@ const router = new Router({
 			component: () => import('@/pages/QuestionSearch'),
 			meta: { title: '帮助中心' }
 		}, {
+			path: '/questionCategory',
+			component: () => import('@/pages/QuestionCategory'),
+			meta: { title: '帮助中心' }
+		}, {
 			path: '/article/:articleId',
 			component: () => import('@/pages/Article'),
 			meta: { title: '文章详情' }
+		}, {
+			path: '/subscribe',
+			component: () => import('@/pages/Subscribe'),
+			meta: { title: '消息订阅' }
 		}, {
 			path: '/*',
 			component: () => import('@/pages/NotFound'),
