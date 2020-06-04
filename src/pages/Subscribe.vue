@@ -1,17 +1,17 @@
 <template>
     <div class="page">
-        <div class="empty-banner">消息订阅</div>
-        <div class="margin-top padding-tb bg-white">
+        <div class="empty-banner bg-gradual-purple">消息订阅banner</div>
+        <div class="margin-top">
             <div v-show="!openSubscribeLoading">
-                <ListCell v-for="item in openSubscribe" :key="item.tagid" :title="item.title">
-                    
-                </ListCell>
                 <van-cell-group title="我的订阅" v-show="!openSubscribeLoading">
                     <van-cell v-for="item in openSubscribe" :key="item.tagid" :title="item.title">
-                        <van-switch slot="icon" :value="openSubscribeStatus(item.tagid)" @change="updateOpenSubscribe(item.tagid)" :disabled="item.saving" />
+                        <template #right-icon>
+                            <van-switch :value="openSubscribeStatus(item.tagid)" @change="updateOpenSubscribe(item.tagid)" :loading="item.saving" size="24px" />
+                        </template>
                     </van-cell>
                 </van-cell-group>
             </div>
+            <div class="padding text-sm text-grey">消息订阅基于用户标签实现，请先前往管理后台设置好公众号标签再更改本页配置</div>
             <van-loading class="text-center" v-if="openSubscribeLoading">加载中...</van-loading>
         </div>
     </div>
@@ -31,8 +31,8 @@ export default {
             wxUserTags: [],
             openSubscribe: [
                 { tagid: 105, title: '课程更新提醒', saving: false },
-                { tagid: 106, title: '在线直播提醒', saving: false },
-                { tagid: 107, title: '研究报告提醒', saving: false },
+                { tagid: 106, title: '降价提醒', saving: false },
+                { tagid: 107, title: '优惠券即将过期提醒', saving: false },
             ],
             openSubscribeLoading: false,
         }
@@ -63,9 +63,9 @@ export default {
                     this.wxUserTags = res.data;
                 }else if (res.msg === 'not_subscribed') {
                     this.showWxQrCodeModal = true;
-                    Toast('请先关注公众号,关注后请刷新');
+                    vant.Toast('请先关注公众号,关注后请刷新');
                 }else {
-                    Toast(res.msg);
+                    vant.Toast(res.msg);
                 }
             });
         },
@@ -77,7 +77,7 @@ export default {
             }
             let index = this.openSubscribe.findIndex(item => item.tagid == tagid)
             if (this.openSubscribe[index].saving) {
-                Toast('请勿频繁操作');
+                vant.Toast('请勿频繁操作');
                 return
             }
             this.openSubscribe[index].saving = true
@@ -98,9 +98,9 @@ export default {
                     wxAuth().then(() => this.getUserTags());
                 } else if (res.msg === 'not_subscribed') {
                     this.showWxQrCodeModal = true;
-                    Toast('请先关注公众号,关注后请刷新');
+                    vant.Toast('请先关注公众号,关注后请刷新');
                 } else {
-                    Toast(res.msg);
+                    vant.Toast(res.msg);
                 }
             });
         }

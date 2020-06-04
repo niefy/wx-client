@@ -35,7 +35,7 @@ export default {
                 if (res.code == 200) {
                     this.sortQuestions(res.data);
                 } else {
-                    Toast(res.msg);
+                    vant.Toast(res.msg);
                 }
             });
         },

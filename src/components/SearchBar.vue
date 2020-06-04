@@ -20,7 +20,7 @@ export default {
 	methods: {
 		search() {
 			if(!this.keywords1 || ''==this.keywords1.trim()){//未输入关键字
-				Toast('请输入需要查询的关键词');
+				vant.Toast('请输入需要查询的关键词');
 			}else{
 				this.$go('/questionSearch?keywords='+this.keywords1)
         		this.$emit('change', this.keywords1);

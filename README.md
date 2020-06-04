@@ -23,24 +23,28 @@ npm run build
 5. 浏览器打开如下地址：
     - 首页：http://localhost:8080
 
-## 体验微信分享和微信登录示例页面
-由于微信分享和微信登录功能需在正式域名下使用，开发环境建议使用nginx转发功能+ngrok代理，例如：
+## 体验微信分享、微信授权登录等功能
+由于微信分享和微信登录功能需在正式域名下使用，有如下两种方式体验
+### 方式一：部署到生产环境再看
+生产环境建议打包后将文件部署到nginx,后端请求使用nginx转发功能
 nginx.conf配置
 ```
 location /wx/ { #转发后端接口
     proxy_pass   http://127.0.0.1:8088/wx/;
 }
-location /client/ { #转发微信端H5
-    proxy_pass   http://127.0.0.1:8080/;
-}
+```
+### 方式二：使用ngrok穿透到内网
+然后配置ngrok映射到nginx端口:http://xxx.ngrok.io -> http://localhost:8080
+```
+ngrok http  8080
 ```
 
-然后配置ngok映射到nginx端口:http://xxx.ngrok.io -> http://localhost:80
-```
-ngrok http  80
-```
+### 不管哪种方式都需要检查如下配置：
+ - 公众号/测试号后台：接口配置是否成功
+ - 公众号/测试号后台：JS接口安全域名，只填域名，不要带协议及URL,如：xxx.ngrok.io
+ - 公众号/测试号后台：网页授权回调域名，只填域名，不要带协议及URL,如：xxx.ngrok.io
 
-然后可以微信访问开发环境页面
+然后可以微信访问开发环境页面或者使用微信开发者工具打开
     - 文章(微信分享)示例：http://xxx.ngrok.io/client/article/1
     - 微信登录示例：http://xxx.ngrok.io/client/wxLogin
 
