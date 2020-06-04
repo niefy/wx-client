@@ -48,6 +48,13 @@ ngrok http  8080
     - 文章(微信分享)示例：http://xxx.ngrok.io/client/article/1
     - 微信登录示例：http://xxx.ngrok.io/client/wxLogin
 
+
+## 截图
+![首页](https://s1.ax1x.com/2020/06/04/tB5r38.jpg)
+![订阅](https://s1.ax1x.com/2020/06/04/tB5sgS.jpg)
+![关注](https://s1.ax1x.com/2020/06/04/tB5NBd.jpg)
+![文章](https://s1.ax1x.com/2020/06/04/tB5dAI.jpg)
+
 ## 生产环境如何部署（需先部署wx-api）
 1. 配置wx-client目录下.env.production文件
 2. 编译打包：npm run build
