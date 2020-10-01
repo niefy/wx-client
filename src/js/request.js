@@ -1,4 +1,4 @@
-import fly from 'flyio'
+// import fly from 'flyio'
 
 fly.config.timeout = 10000;
 
