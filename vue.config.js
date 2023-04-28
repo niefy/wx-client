@@ -16,7 +16,8 @@ module.exports = {
     parallel: undefined,
     configureWebpack:{
 		devServer: {
-			disableHostCheck: true
+			historyApiFallback: true,
+			allowedHosts:"all",
 		},
 		externals: {
 			vue: "Vue",
